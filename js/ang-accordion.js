@@ -7,11 +7,10 @@
 (function() {
     'use strict';
 
-    angular
-      .module('angAccordion', ['collapsibleItem'])
+    angular.module('angAccordion', ['collapsibleItem'])
       .controller('angAccordionController', ['$scope', function($scope){
         var collapsibleItems = [];
-          
+
           this.openCollapsibleItem = function(collapsibleItemToOpen) {
             if( $scope.oneAtATime ) {
               angular.forEach(collapsibleItems, function(collapsibleItem) {
@@ -24,7 +23,7 @@
 
           this.addCollapsibleItem = function(collapsibleItem) {
             collapsibleItems.push(collapsibleItem);
-            
+
             if ( $scope.closeIconClass !== undefined || $scope.openIconClass !== undefined ) {
               collapsibleItem.iconsType = 'class';
               collapsibleItem.closeIcon = $scope.closeIconClass;
@@ -51,7 +50,7 @@
           openIconUrl: '@',
           closeIconClass: '@',
           openIconClass: '@',
-          iconPosition: '@' 
+          iconPosition: '@'
         },
         controller: 'angAccordionController',
         template: '<div class="accordion" ng-transclude></div>'
@@ -72,7 +71,7 @@
         link: function(scope, element, attrs, accordionController) {
           scope.isOpenned = (scope.initiallyOpen) ? true : false;
           accordionController.addCollapsibleItem(scope);
-          
+
           if(scope.isOpenned)
             scope.icon = scope.openIcon;
           else
@@ -81,7 +80,7 @@
           scope.toggleCollapsibleItem = function () {
             if(scope.itemDisabled)
               return;
-            
+
             if(!scope.isOpenned) {
               accordionController.openCollapsibleItem(this);
               scope.icon = scope.openIcon;
